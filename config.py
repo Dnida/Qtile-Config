@@ -11,9 +11,9 @@ sup = "mod4"
 alt = "mod1"
 
 keys = [
+ #cycle to next group left
     Key([sup], "Left", lazy.group.prevgroup()),
-
-    # cycle to next group
+ # cycle to next group right
     Key([sup], "Right", lazy.group.nextgroup()),
  # Window manager controls
      Key([alt, 'control'], 'r', lazy.restart()),
