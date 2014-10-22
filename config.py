@@ -11,15 +11,11 @@ sup = "mod4"
 alt = "mod1"
 
 keys = [
- #cycle to next group left
-    Key([sup], "Left", lazy.group.prevgroup()),
- # cycle to next group right
-    Key([sup], "Right", lazy.group.nextgroup()),
  # Window manager controls
      Key([alt, 'control'], 'r', lazy.restart()),
      Key([alt, 'control'], 'q', lazy.shutdown()),
      Key([alt], 'r', lazy.spawn('dmenu_run')),
-     Key([alt], 'Return', lazy.spawn('xterm')),
+     Key([alt], 'Return', lazy.spawn('urxvt')),
      Key([alt], 'w', lazy.window.kill()),
      Key([alt], 'Tab', lazy.layout.next()),
      Key([alt], 'Left', lazy.screen.prevgroup()),
@@ -92,20 +88,24 @@ layouts = [
     border_normal="#FFFFFF"
 ),
 ]
-
+floating_layout = layout.Floating(
+		    border_width=0
+		    ,max_border_width=0
+		    ,fullscreen_border_width=0
+)
 
 # orange text on grey background
-default_data = dict(fontsize=12,
+default_data = dict(fontsize=10,
                     foreground="FF6600",
                     background="1D1D1D",
-                    font="ttf-droid")
+                    font="terminus")
 
 # we need a screen or else qtile won't load
 screens = [
     Screen(bottom = bar.Bar([widget.GroupBox(**default_data),
                              widget.WindowName(**default_data),
                              widget.Clock(**default_data)],
-                             27,))]
+                             22,))]
 
 @hook.subscribe.client_new
 def dialogs(window):
@@ -184,6 +184,5 @@ def runner():
      # client_new hook has time to group them by the window title
      # as the window title for them is the same when they open
 
-     #subprocess.Popen(['urxvt', '-e', 'ncmpcpp-opener'])
      #subprocess.Popen(['urxvt', '-e', 'weechat-curses'])
 
